@@ -211,6 +211,16 @@ export const MODEL_OPTIONS: Record<string, ModelOption[]> = {
       temperature: 0,
     },
   ],
+  databricks: [
+    {
+      name: "databricks-claude-sonnet-4",
+      displayName: "Claude Sonnet 4 (Databricks)",
+      description: "Claude Sonnet 4 via Databricks Model Serving",
+      maxOutputTokens: 32_000,
+      contextWindow: 200_000,
+      temperature: 0,
+    },
+  ],
 };
 
 export const PROVIDER_TO_ENV_VAR: Record<string, string> = {
@@ -218,6 +228,7 @@ export const PROVIDER_TO_ENV_VAR: Record<string, string> = {
   anthropic: "ANTHROPIC_API_KEY",
   google: "GEMINI_API_KEY",
   openrouter: "OPENROUTER_API_KEY",
+  databricks: "DATABRICKS_TOKEN",
 };
 
 export const CLOUD_PROVIDERS: Record<
@@ -257,6 +268,13 @@ export const CLOUD_PROVIDERS: Record<
     displayName: "Dyad",
     websiteUrl: "https://academy.dyad.sh/settings",
     gatewayPrefix: "dyad/",
+  },
+  databricks: {
+    displayName: "Databricks",
+    hasFreeTier: false,
+    websiteUrl:
+      "https://docs.databricks.com/en/machine-learning/model-serving/index.html",
+    gatewayPrefix: "",
   },
 };
 

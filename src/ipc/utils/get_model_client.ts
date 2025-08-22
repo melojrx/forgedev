@@ -248,6 +248,28 @@ function getRegularModelClient(
         backupModelClients: [],
       };
     }
+    case "databricks": {
+      // Databricks uses OpenAI compatible API
+      const databricksHost = getEnvVar("DATABRICKS_HOST");
+      if (!databricksHost) {
+        throw new Error(
+          "DATABRICKS_HOST environment variable is required for Databricks",
+        );
+      }
+      const baseURL = `https://${databricksHost}/serving-endpoints`;
+      const provider = createOpenAICompatible({
+        name: "databricks",
+        baseURL,
+        apiKey,
+      });
+      return {
+        modelClient: {
+          model: provider(model.name),
+          builtinProviderId: providerId,
+        },
+        backupModelClients: [],
+      };
+    }
     default: {
       // Handle custom providers
       if (providerConfig.type === "custom") {
